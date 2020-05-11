@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include <conio.h>
+#include <conio
 #include <windows.h>
 #include <time.h>
 
-//////////////  Á» ´õ ½¬¿î °ÔÀÓÀ» ¿øÇÏ¸é 254ÁÙÀÇ 0À» 15·Î º¯°æ     /////////////////////
+//////////////  ì¢€ ë” ì‰¬ìš´ ê²Œì„ì„ ì›í•˜ë©´ 254ì¤„ì˜ 0ì„ 15ë¡œ ë³€ê²½     /////////////////////
 /////////////                        +                             /////////////////////
-///////////// Á¤´äÀ» º¸¸é¼­ °ÔÀÓÀ» ÇÏ°í½Í´Ù¸é 46ÁÙÀÇ 0À» 15·Î º¯°æ /////////////////////
+///////////// ì •ë‹µì„ ë³´ë©´ì„œ ê²Œì„ì„ í•˜ê³ ì‹¶ë‹¤ë©´ 46ì¤„ì˜ 0ì„ 15ë¡œ ë³€ê²½ /////////////////////
 
 void gotoxy(int x, int y)
 {
@@ -49,7 +49,7 @@ ab(int a, int b, int c, int aa){
 	return aa;
 }
 
-//////Å¸ÀÏ ³Ö±â 
+//////íƒ€ì¼ ë„£ê¸° 
 tile(int *a, int f){
 	int i;
 	for(i=0; i<2; i++){
@@ -74,7 +74,7 @@ tile(int *a, int f){
 	}	
 } 
 
-////////¹®¾ç ³Ö±â 
+////////ë¬¸ì–‘ ë„£ê¸° 
 spch(int *a, int *b, int f){
 	int i;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
@@ -91,7 +91,7 @@ spch(int *a, int *b, int f){
 	printf("\n");
 }
 
-///////ÁÙ ¸ÂÃç Å¸ÀÏ ³Ö±â 2
+///////ì¤„ ë§ì¶° íƒ€ì¼ ë„£ê¸° 2
 tile2(int *a, int f){
 	int i;
 	for(i=0; i<2; i++){
@@ -119,7 +119,7 @@ tile2(int *a, int f){
 	return f;
 } 
 
-////////////////////////////////////////////////////////////°ÔÀÓ È­¸é 
+////////////////////////////////////////////////////////////ê²Œì„ í™”ë©´ 
 maingame(int ht, int sco, int best, int t, int btt){
 	
 	srand(time(NULL));
@@ -161,13 +161,13 @@ maingame(int ht, int sco, int best, int t, int btt){
 				for(i=1; i<10; i++){
 					ch[i]=1+rand()%3;
 					if(ch[i]==1) {
-						ch[i]="¡Ú";		a++;
+						ch[i]="â˜…";		a++;
 					}
 					if(ch[i]==2) {
-						ch[i]="¡Ü";		b++;
+						ch[i]="â—";		b++;
 					}
 					if(ch[i]==3) {
-						ch[i]="¡á"; 	c++;}
+						ch[i]="â– "; 	c++;}
 					}
 			}while((a*b*c)!=24);
 	
@@ -205,7 +205,7 @@ maingame(int ht, int sco, int best, int t, int btt){
 	
 		
 		aa=0;
-	///////////Á¤´ä ¼ö ±¸ÇÏ±â 
+	///////////ì •ë‹µ ìˆ˜ êµ¬í•˜ê¸° 
 		for(i=1; i<8; i++){
 			for(j=i+1; j<9; j++){
 				for(z=j+1; z<10; z++){
@@ -253,9 +253,9 @@ maingame(int ht, int sco, int best, int t, int btt){
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 	gotoxy(22,30);
-	printf("°³¼ö : %d\n\n",aa);
+	printf("ê°œìˆ˜ : %d\n\n",aa);
 	
-	//////////////±×¸² ÇÁ¸°Æ® 
+	//////////////ê·¸ë¦¼ í”„ë¦°íŠ¸ 
 		gotoxy(7,10);
 		tile(totclr,f);
 		spch(totclr, ch,f);
@@ -269,36 +269,36 @@ maingame(int ht, int sco, int best, int t, int btt){
 		spch(totclr, ch,f);
 		f=tile2(totclr,f);
 		
-	///////////±×¸² À§Ä¡ ¹øÈ£ 	
+	///////////ê·¸ë¦¼ ìœ„ì¹˜ ë²ˆí˜¸ 	
 	gotoxy(10,10);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[1]+7);
-	printf("£±");
+	printf("ï¼‘");
 	gotoxy(21,10);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[2]+7);
-	printf("£²");
+	printf("ï¼’");
 	gotoxy(32,10);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[3]+7);
-	printf("£³");
+	printf("ï¼“");
 	gotoxy(10,16);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[4]+7);
-	printf("£´");
+	printf("ï¼”");
 	gotoxy(21,16);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[5]+7);
-	printf("£µ");
+	printf("ï¼•");
 	gotoxy(32,16);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[6]+7);
-	printf("£¶");
+	printf("ï¼–");
 	gotoxy(10,22);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[7]+7);
-	printf("£·");
+	printf("ï¼—");
 	gotoxy(21,22);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[8]+7);
-	printf("£¸");
+	printf("ï¼˜");
 	gotoxy(32,22);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[9]+7);
-	printf("£¹");
+	printf("ï¼™");
 
-	//////////////////////////////////////////// Áßº¹ Á¤´ä 
+	//////////////////////////////////////////// ì¤‘ë³µ ì •ë‹µ 
 	int over, ov, ove;
 	int	qq[15], ww[15], ee[15];
 	
@@ -311,7 +311,7 @@ maingame(int ht, int sco, int best, int t, int btt){
 	over=1;
 	
 	int x, y=10;
-   /////////////////////////////////////////ÀÔ·Â¶õ 
+   /////////////////////////////////////////ì…ë ¥ë€ 
 	for(i=0; i<10000000000; i++){
 			x=50;
 			y=12;
@@ -361,7 +361,7 @@ maingame(int ht, int sco, int best, int t, int btt){
 			for(ov=1; ov<over; ov++){
 				if(qq[over]==qq[ov]&&ww[over]==ww[ov]&&ee[over]==ee[ov]) ove=1;
 			}
-			/////Á¤´ä ÆÇº° 
+			/////ì •ë‹µ íŒë³„ 
 			if(ove!=1&&ch[q]==ch[w]&&ch[w]==ch[e]){
 				if(backclr[q]==backclr[w]&&backclr[w]==backclr[e]){
 					if(pntclr[q]==pntclr[w]&&pntclr[w]==pntclr[e]){
@@ -513,31 +513,31 @@ gameover(int sco, int best, int t, int btt, int time){
 		gotoxy(29,20);
 		printf("PLAY  TIME :%2d m  %2d s\n", (time/60), (time%60));
 		gotoxy(34,7);
-		printf("ÃàÇÏÇÕ´Ï´Ù!!!");
+		printf("ì¶•í•˜í•©ë‹ˆë‹¤!!!");
 		
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
 		gotoxy(5,13);
-		printf("   ¡á    ¡á    ¡á");
+		printf("   â–     â–     â– ");
 		gotoxy(5,15);
-		printf("  ¡á¡á  ¡á¡á  ¡á¡á");
+		printf("  â– â–   â– â–   â– â– ");
 		gotoxy(5,16);
-		printf("  ¡á¡á¡á¡á¡á¡á¡á¡á");
+		printf("  â– â– â– â– â– â– â– â– ");
 		gotoxy(5,17);
-		printf("  ¡á¡á¡á¡á¡á¡á¡á¡á");
+		printf("  â– â– â– â– â– â– â– â– ");
 		gotoxy(5,18);
-		printf("  ¡á¡á¡á¡á¡á¡á¡á¡á");
+		printf("  â– â– â– â– â– â– â– â– ");
 		
 		
 		gotoxy(55,13);
-		printf("   ¡á    ¡á    ¡á");
+		printf("   â–     â–     â– ");
 		gotoxy(55,15);
-		printf("  ¡á¡á  ¡á¡á  ¡á¡á");
+		printf("  â– â–   â– â–   â– â– ");
 		gotoxy(55,16);
-		printf("  ¡á¡á¡á¡á¡á¡á¡á¡á");
+		printf("  â– â– â– â– â– â– â– â– ");
 		gotoxy(55,17);
-		printf("  ¡á¡á¡á¡á¡á¡á¡á¡á");
+		printf("  â– â– â– â– â– â– â– â– ");
 		gotoxy(55,18);
-		printf("  ¡á¡á¡á¡á¡á¡á¡á¡á");
+		printf("  â– â– â– â– â– â– â– â– ");
 		
 		
 		bestscore(1, sco);
@@ -555,7 +555,7 @@ gameover(int sco, int best, int t, int btt, int time){
 		Sleep(1000);
 		gotoxy(23,31);
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),8);
-		printf("¤Ñ¸ŞÀÎÈ­¸éÀ¸·Î µ¹¾Æ°¡·Á¸é ENTER¤Ñ");
+		printf("ã…¡ë©”ì¸í™”ë©´ìœ¼ë¡œ ëŒì•„ê°€ë ¤ë©´ ENTERã…¡");
 		
 		enter=getch();
 		if(enter==13){
@@ -584,19 +584,19 @@ heart2(int hh){
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 		printf("LIFE : ");
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-		printf("¢¾ ¢¾ ¢¾");
+		printf("â™¥ â™¥ â™¥");
 	}
 	if(hh==2){
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 		printf("LIFE : ");
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-		printf("¢¾ ¢¾        ");
+		printf("â™¥ â™¥        ");
 	}
 	if(hh==1){
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 		printf("LIFE : ");
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-		printf("¢¾          ");
+		printf("â™¥          ");
 	}
 	
 }
@@ -681,11 +681,11 @@ firstscreen(int best, int btt, int ht, int score, int time){
 	gotoxy(55,3);
 	printf("   TIME    :%2d m %2d s", (time/60), (time%60));
 	gotoxy(0,5);
-	printf("¡Ü¡Ú¡á¡Ü¡Ú¡á¡Ü¡Ú¡á¡Ü¡Ú¡á¡Ü¡Ú");
+	printf("â—â˜…â– â—â˜…â– â—â˜…â– â—â˜…â– â—â˜…");
 	gotoxy(52,5);
-	printf("¡á¡Ü¡Ú¡á¡Ü¡Ú¡á¡Ü¡Ú¡á¡Ü¡Ú¡Ü¡Ú");
+	printf("â– â—â˜…â– â—â˜…â– â—â˜…â– â—â˜…â—â˜…");
 	gotoxy(0,30);
-	printf("¡Ü¡Ú¡á¡Ü¡Ú¡á¡Ü¡Ú¡á¡Ü¡Ú¡á¡Ü¡Ú¡Ü¡Ú¡á¡Ü¡Ú¡á¡Ü¡Ú¡á¡Ü¡Ú¡á¡Ü¡Ú¡Ü¡Ú¡á¡Ü¡Ú¡á¡Ü¡Ú¡á¡Ü¡Ú¡á");
+	printf("â—â˜…â– â—â˜…â– â—â˜…â– â—â˜…â– â—â˜…â—â˜…â– â—â˜…â– â—â˜…â– â—â˜…â– â—â˜…â—â˜…â– â—â˜…â– â—â˜…â– â—â˜…â– ");
 	gotoxy(37,14);
 	printf("START");
 	gotoxy(37,19);
@@ -694,7 +694,7 @@ firstscreen(int best, int btt, int ht, int score, int time){
 	printf("EXIT");
 	gotoxy(50,32);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),8);
-	printf("ÀÌµ¿ : ¡è ¡é   ¼±ÅÃ : ENTER");
+	printf("ì´ë™ : â†‘ â†“   ì„ íƒ : ENTER");
 	
 	
 	keypoint(kk); 
@@ -737,10 +737,10 @@ firstscreen(int best, int btt, int ht, int score, int time){
 				system("cls"); 
 				gotoxy(33,15);
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
-				printf("°¨»çÇÕ´Ï´Ù :)");
+				printf("ê°ì‚¬í•©ë‹ˆë‹¤ :)");
 				gotoxy(28,31);
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),8);
-				printf("¤Ñ¾Æ¹«Å°³ª ´­·¯ÁÖ¼¼¿ä¤Ñ");
+				printf("ã…¡ì•„ë¬´í‚¤ë‚˜ ëˆŒëŸ¬ì£¼ì„¸ìš”ã…¡");
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),0);
 				exit(0);
 			}
@@ -754,42 +754,42 @@ rule1(int best, int btt, int ht, int score, int time){
 		
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
 		gotoxy(3,4);
-		printf("1. ¹ÙÅÁ»ö, µµÇü, µµÇüÀÇ »öÀÌ °¢°¢ ¸ğµÎ ´Ù¸£°Å³ª ¸ğµÎ °°Àº");
+		printf("1. ë°”íƒ•ìƒ‰, ë„í˜•, ë„í˜•ì˜ ìƒ‰ì´ ê°ê° ëª¨ë‘ ë‹¤ë¥´ê±°ë‚˜ ëª¨ë‘ ê°™ì€");
 		gotoxy(3,5);
-		printf("   3°³ÀÇ ±×¸²À» Á¶ÇÕ ÇØ¾ß ÇÑ´Ù.");
+		printf("   3ê°œì˜ ê·¸ë¦¼ì„ ì¡°í•© í•´ì•¼ í•œë‹¤.");
 		gotoxy(3,7);
-		printf("2. Á¶ÇÕÀÌ ´õ ÀÌ»ó ¾ø´Ù¸é 'X' Å°¸¦ ´­·¯ ´ÙÀ½ ¶ó¿îµå·Î ³Ñ¾î°£´Ù. ");
+		printf("2. ì¡°í•©ì´ ë” ì´ìƒ ì—†ë‹¤ë©´ 'X' í‚¤ë¥¼ ëˆŒëŸ¬ ë‹¤ìŒ ë¼ìš´ë“œë¡œ ë„˜ì–´ê°„ë‹¤. ");
 		gotoxy(3,9);
-		printf("3. ÀÌ¹Ì ÀÔ·Â µÈ ±×¸²µµ ´ÙÀ½ Á¶ÇÕ¿¡ ´Ù½Ã ÀÔ·ÂÀÌ °¡´ÉÇÏ´Ù.(=Áßº¹ ¼±ÅÃ °¡´É)");
+		printf("3. ì´ë¯¸ ì…ë ¥ ëœ ê·¸ë¦¼ë„ ë‹¤ìŒ ì¡°í•©ì— ë‹¤ì‹œ ì…ë ¥ì´ ê°€ëŠ¥í•˜ë‹¤.(=ì¤‘ë³µ ì„ íƒ ê°€ëŠ¥)");
 		gotoxy(3,11);
-		printf("4. ÃÑ 3¹ø ¿À´ä ½Ã °ÔÀÓÀÌ Á¾·áµÈ´Ù.");
+		printf("4. ì´ 3ë²ˆ ì˜¤ë‹µ ì‹œ ê²Œì„ì´ ì¢…ë£Œëœë‹¤.");
 		gotoxy(3,13);
-		printf("5. ¿À´äÀº Ç¥½Ã°¡ µÈ´Ù.");
+		printf("5. ì˜¤ë‹µì€ í‘œì‹œê°€ ëœë‹¤.");
 
 		gotoxy(8,19);
-		printf("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡  Á¡ ¼ö ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		printf("â”€â”€â”€â”€â”€â”€â”€â”€  ì  ìˆ˜ â”€â”€â”€â”€â”€â”€â”€â”€");
 		gotoxy(13,22);
-		printf(" Á¶ ÇÕ :  +1 Á¡");
+		printf(" ì¡° í•© :  +1 ì ");
 		gotoxy(13,24);
-		printf("   X   :  +3 Á¡");
+		printf("   X   :  +3 ì ");
 		gotoxy(46,19);
-		printf("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡  ÀÔ ·Â ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+		printf("â”€â”€â”€â”€â”€â”€â”€â”€  ì… ë ¥ â”€â”€â”€â”€â”€â”€â”€â”€");
 		gotoxy(51,22);
-		printf(" ¼ı ÀÚ : 1 ~ 9");
+		printf(" ìˆ« ì : 1 ~ 9");
 		gotoxy(51,24);
-		printf(" ¿µ ¹® :   X  ");
+		printf(" ì˜ ë¬¸ :   X  ");
 		
 		gotoxy(38,11);
 		printf("(LIFE :   X 3)");
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),12);
 		gotoxy(46,11);
-		printf("¢¾");
+		printf("â™¥");
 		
 		gotoxy(39,32);
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
-		printf("-£±-");
+		printf("-ï¼‘-");
 		gotoxy(72,32);
-		printf("¦¬¢º");
+		printf("â”â–¶");
 				
 		gotoxy(2,1);
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),8);
@@ -817,82 +817,82 @@ rule2(int best, int btt, int ht, int score, int time){
 	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
 	gotoxy(23,3);
-	printf("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡  Á¶ÇÕ ¿¹½Ã ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+	printf("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€  ì¡°í•© ì˜ˆì‹œ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€");
 	
 	for(i=0; i<3; i++){gotoxy(11,7+i); tuto(224, 128, 240);}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
 	gotoxy(10,11);
-	printf(">  ´Ù¸¥ ¹ÙÅÁ»ö\n\n\t  >  °°Àº µµÇü\n\n\t  >  ´Ù¸¥ µµÇüÀÇ »ö");
+	printf(">  ë‹¤ë¥¸ ë°”íƒ•ìƒ‰\n\n\t  >  ê°™ì€ ë„í˜•\n\n\t  >  ë‹¤ë¥¸ ë„í˜•ì˜ ìƒ‰");
 		
 	for(i=0; i<3; i++){gotoxy(11,19+i); tuto(128, 128, 128);}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);	
 	gotoxy(10,23);
-	printf(">  °°Àº ¹ÙÅÁ»ö\n\n\t  >  ´Ù¸¥ µµÇü\n\n\t  >  °°Àº µµÇüÀÇ »ö");
+	printf(">  ê°™ì€ ë°”íƒ•ìƒ‰\n\n\t  >  ë‹¤ë¥¸ ë„í˜•\n\n\t  >  ê°™ì€ ë„í˜•ì˜ ìƒ‰");
 	
 	for(i=0; i<3; i++){gotoxy(48,7+i); tuto(240, 224, 128);}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
 	gotoxy(47,11);
-	printf("> ´Ù¸¥ ¹ÙÅÁ»ö");
+	printf("> ë‹¤ë¥¸ ë°”íƒ•ìƒ‰");
 	gotoxy(47,13);
-	printf("> ´Ù¸¥ µµÇü");
+	printf("> ë‹¤ë¥¸ ë„í˜•");
 	gotoxy(47,15);
-	printf("> ´Ù¸¥ µµÇüÀÇ »ö");
+	printf("> ë‹¤ë¥¸ ë„í˜•ì˜ ìƒ‰");
 	
 	for(i=0; i<3; i++){gotoxy(48,19+i); tuto(224, 224, 224);}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
 	gotoxy(47,23);
-	printf("> °°Àº ¹ÙÅÁ»ö");
+	printf("> ê°™ì€ ë°”íƒ•ìƒ‰");
 	gotoxy(47,25);
-	printf("> °°Àº µµÇü");
+	printf("> ê°™ì€ ë„í˜•");
 	gotoxy(47,27);
-	printf("> ´Ù¸¥ µµÇüÀÇ »ö");		
+	printf("> ë‹¤ë¥¸ ë„í˜•ì˜ ìƒ‰");		
 	
 	
 	gotoxy(13,8);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),233);
-	printf("¡Ú");
+	printf("â˜…");
 	gotoxy(20,8);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),138);
-	printf("¡Ú");
+	printf("â˜…");
 	gotoxy(27,8);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),252);
-	printf("¡Ú");
+	printf("â˜…");
 			
 	gotoxy(13,20);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),140);
-	printf("¡Ü");
+	printf("â—");
 	gotoxy(20,20);
-	printf("¡á");
+	printf("â– ");
 	gotoxy(27,20);
-	printf("¡Ú");
+	printf("â˜…");
 	
 	gotoxy(50,8);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),250);
-	printf("¡Ü");
+	printf("â—");
 	gotoxy(57,8);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),228);
-	printf("¡á");
+	printf("â– ");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),137);	
 	gotoxy(64,8);
-	printf("¡Ú");
+	printf("â˜…");
 	
 	gotoxy(50,20);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),234);
-	printf("¡Ú");
+	printf("â˜…");
 	gotoxy(57,20);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),236);
-	printf("¡Ú");
+	printf("â˜…");
 	gotoxy(64,20);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),233);
-	printf("¡Ú");
+	printf("â˜…");
 	
 	gotoxy(39,32);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
-	printf("-£²-");
+	printf("-ï¼’-");
 	gotoxy(72,32);
-	printf("¦¬¢º");
+	printf("â”â–¶");
 	gotoxy(6,32);
-	printf("¢¸¦¬");
+	printf("â—€â”");
 	
 	gotoxy(2,1);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),8);
@@ -924,34 +924,34 @@ rule3(int best, int btt, int ht, int score, int time){
 	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
 	gotoxy(21,3);
-	printf("¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡  ±×¸² ÀÔ·Â ¹øÈ£ ¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡¦¡");
+	printf("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€  ê·¸ë¦¼ ì…ë ¥ ë²ˆí˜¸ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€");
 	for(i=0; i<3; i++){gotoxy(30,8+i); tuto(112,112,112);}
 	for(i=0; i<3; i++){gotoxy(30,12+i); tuto(112,112,112);}
 	for(i=0; i<3; i++){gotoxy(30,16+i); tuto(112,112,112);}	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),112);
-	gotoxy(32,9); printf("£±"); 
-	gotoxy(39,9); printf("£²");
-	gotoxy(46,9); printf("£³");
-	gotoxy(32,13); printf("£´"); 
-	gotoxy(39,13); printf("£µ");
-	gotoxy(46,13); printf("£¶");
-	gotoxy(32,17); printf("£·"); 
-	gotoxy(39,17); printf("£¸");
-	gotoxy(46,17); printf("£¹");
+	gotoxy(32,9); printf("ï¼‘"); 
+	gotoxy(39,9); printf("ï¼’");
+	gotoxy(46,9); printf("ï¼“");
+	gotoxy(32,13); printf("ï¼”"); 
+	gotoxy(39,13); printf("ï¼•");
+	gotoxy(46,13); printf("ï¼–");
+	gotoxy(32,17); printf("ï¼—"); 
+	gotoxy(39,17); printf("ï¼˜");
+	gotoxy(46,17); printf("ï¼™");
 	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
 	gotoxy(24,23);
-	printf("¦¬  ÀÔ·Â ¼ø¼­´Â »ó°ü ¾øÀ½.");
+	printf("â”  ì…ë ¥ ìˆœì„œëŠ” ìƒê´€ ì—†ìŒ.");
 	gotoxy(24,25);
-	printf("¦¬  ÀÔ·Â Ãë¼Ò ºÒ°¡´É.");
+	printf("â”  ì…ë ¥ ì·¨ì†Œ ë¶ˆê°€ëŠ¥.");
 	gotoxy(24,27);
-	printf("¦¬  ±×¸²ÀÇ ¿ŞÂÊ À§¿¡ Ç¥½ÃµÇ¾î ÀÖÀ½.");
+	printf("â”  ê·¸ë¦¼ì˜ ì™¼ìª½ ìœ„ì— í‘œì‹œë˜ì–´ ìˆìŒ.");
 	
 	gotoxy(39,32);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
-	printf("-£³-");
+	printf("-ï¼“-");
 	gotoxy(6,32);
-	printf("¢¸¦¬");
+	printf("â—€â”");
 	
 	gotoxy(2,1);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),8);
@@ -994,7 +994,7 @@ keypoint(int key){
 	if(key==0){
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
 		gotoxy(48,14);
-		printf("¡ç  ");
+		printf("â†  ");
 		gotoxy(48,19);
 		printf("    ");
 		gotoxy(48,24);
@@ -1006,7 +1006,7 @@ keypoint(int key){
 		gotoxy(48,14);
 		printf("    ");
 		gotoxy(48,19);
-		printf("¡ç  ");
+		printf("â†  ");
 		gotoxy(48,24);
 		printf("    ");
 	}
@@ -1018,7 +1018,7 @@ keypoint(int key){
 		gotoxy(48,19);
 		printf("    ");
 		gotoxy(48,24);
-		printf("¡ç  ");
+		printf("â†  ");
 	}
 }
 
