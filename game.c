@@ -689,12 +689,13 @@ firstscreen(int best, int btt, int ht, int score, int time){
 	printf("LAST SCORE : %-3d", score);
 	gotoxy(55,3);
 	printf("   TIME    :%2d m %2d s", (time/60), (time%60));		
-	gotoxy(0,5);
-	printf("●★■●★■●★■●★■●★");
-	gotoxy(52,5);
-	printf("■●★■●★■●★■●★●★");
-	gotoxy(0,30);
-	printf("●★■●★■●★■●★■●★●★■●★■●★■●★■●★●★■●★■●★■●★■");
+	
+	//gotoxy(0,5);
+	//printf("●★■●★■●★■●★■●★");
+	//gotoxy(52,5);
+	//printf("■●★■●★■●★■●★●★");
+	//gotoxy(0,30);
+	//printf("●★■●★■●★■●★■●★●★■●★■●★■●★■●★●★■●★■●★■●★■");//
 	gotoxy(37,14);
 	printf("START");
 	gotoxy(37,19);
