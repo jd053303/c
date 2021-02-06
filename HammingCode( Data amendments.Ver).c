@@ -7,15 +7,15 @@ main() {
 	int e[4],err[8];
 	do{
 		system("cls");
-		printf("\n\nÈ¦¼ö ÆĞ¸®Æ¼ : 1 	Â¦¼ö ÆĞ¸®Æ¼ : 2\n");
-		printf("\n             ÀÔ·Â : ");
+		printf("\n\ní™€ìˆ˜ íŒ¨ë¦¬í‹° : 1 	ì§ìˆ˜ íŒ¨ë¦¬í‹° : 2\n");
+		printf("\n             ì…ë ¥ : ");
 		
 		do{
 			a=getch()-'0';
 		}while(a!=1&&a!=2);
 		system("cls");
 	
-		printf("\n\n ¿À·ùÄÚµå ÀÔ·Â(7bit) : ");
+		printf("\n\n ì˜¤ë¥˜ì½”ë“œ ì…ë ¥(7bit) : ");
 		for(i=1; i<=7; i++){
 			do{
 				err[i]=getch()-'0';
@@ -52,7 +52,7 @@ main() {
 		else err[b]=0;
 		
 		j=0;
-		printf("\n ½ÇÁ¦ ¹ŞÀº µ¥ÀÌÅÍ °ª : ");
+		printf("\n ì‹¤ì œ ë°›ì€ ë°ì´í„° ê°’ : ");
 		for(i=1; i<=7; i++){
  			printf(" %d ", err[i]);
 		}
@@ -64,7 +64,7 @@ main() {
 		}
 		printf("  ->  DATA : [ %d ]",j);
 		
-		printf("\n\n\n    - ´Ù½Ã ÇÏ·Á¸é 1À» ´­·¯ÁÖ¼¼¿ä -");
+		printf("\n\n\n    - ë‹¤ì‹œ í•˜ë ¤ë©´ 1ì„ ëˆŒëŸ¬ì£¼ì„¸ìš” -");
 		ag=getch()-'0';
 	}while(ag==1);
  	
