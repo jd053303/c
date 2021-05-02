@@ -2,19 +2,16 @@
 #include <conio.h>
 #include <windows.h>
 #include <time.h>
-//////////////  좀 더 쉬운 게임을 원하면 252줄의 0을 15로 변경     /////////////////////
-/////////////                        +                             /////////////////////
-///////////// 정답을 보면서 게임을 하고싶다면 46줄의 0을 15로 변경 /////////////////////
-void gotoxy(int x, int y)
-{
+//////////////                  플레이 모드 변경 안내                     /////////////////////
+/////////////    [정답 개수를 보면서 플레이]   216줄의 0을 15로 변경      /////////////////////
+/////////////      [정답을 보면서 플레이]       41줄의 0을 15로 변경      /////////////////////
+void gotoxy(int x, int y){
 	COORD Pos;
 	Pos.X = x;
 	Pos.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),Pos);	
 }
-
-void cursor(int n) 
-{
+void cursor(int n){
     HANDLE c;
     CONSOLE_CURSOR_INFO ConsoleCursor;
  
@@ -25,20 +22,18 @@ void cursor(int n)
  
     SetConsoleCursorInfo(c , &ConsoleCursor);
 }
-
-void remove_scrollbar()
-{
+void remove_scrollbar(){
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_SCREEN_BUFFER_INFO info;
     GetConsoleScreenBufferInfo(handle, &info);
-    COORD new_size = 
-    {
+    COORD new_size = {
         info.srWindow.Right - info.srWindow.Left + 1,
         info.srWindow.Bottom - info.srWindow.Top + 1
     };
     SetConsoleScreenBufferSize(handle, new_size);
 }
 
+//정답 보기 
 ab(int a, int b, int c, int aa){
 	gotoxy(55,22+aa);
 	if(a==b||b==c||c==a) aa--;
@@ -49,27 +44,23 @@ ab(int a, int b, int c, int aa){
 	return aa;
 }
 
-//////타일 넣기 
+//////타일 출력 
 tile(int *a, int f){
 	int i;
 	for(i=0; i<2; i++){
-	
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf("	  ");
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),*(a+(1+f)));
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), *(a+(1+f)));
 		printf("          ");
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf(" "); 
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), *(a+(2+f)));
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), *(a+(2+f)));
 		printf("          ");
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf(" ");
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), *(a+(3+f)));
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), *(a+(3+f)));
 		printf("          ");
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf(" \n");
 	}	
 } 
@@ -78,9 +69,8 @@ tile(int *a, int f){
 spch(int *a, int *b, int f){
 	int i;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
-		printf("	  ");
+	printf("	  ");
 	for(i=1; i<4; i++){
-		
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), *(a+(i+f)));
 		printf("    ");
 		printf("%s",*(b+(i+f)));
@@ -97,39 +87,34 @@ tile2(int *a, int f){
 	for(i=0; i<2; i++){
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf("	  ");
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),*(a+(1+f)));
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), *(a+(1+f)));
 		printf("          ");
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf(" ");
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), *(a+(2+f)));
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), *(a+(2+f)));
 		printf("          ");
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf(" ");
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), *(a+(3+f)));
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), *(a+(3+f)));
 		printf("          ");
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf(" \n");
 	}
-
 	f=f+3;
-	
 	return f;
 } 
 
-////////////////////////////////////////////////////////////게임 화면 
+////////////////////////////플레이 화면////////////////////////////////// 
 maingame(int ht, int sco, int best, int t, int btt){
 	
 	srand(time(NULL));
-	
 	
 	int backclr[10], pntclr[10], totclr[10], ch[10];
 	int q=0,w=0,e=0, clr=0, i, j,z,htc=0, aa=0, tt,hh=0,mis=0, a, b, c, f=0, cha;
 	
 	system("cls");
 	cursor(1);
+	//타일 랜덤 입력 
 	do{
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 		gotoxy(33,3);
@@ -140,14 +125,13 @@ maingame(int ht, int sco, int best, int t, int btt){
 				for(i=1; i<10; i++){
 					pntclr[i]=1+rand()%3;
 					if(pntclr[i]==1) {
-					pntclr[i]=1;		a++;
+						pntclr[i]=1;		a++;
 					}
 					if(pntclr[i]==2) { 
-					pntclr[i]=10;		b++;
+						pntclr[i]=10;		b++;
 					}
 					if(pntclr[i]==3) {
-					pntclr[i]=12
-					;       c++;
+						pntclr[i]=12;       c++;
 					}
 				}
 			}while(a==0||b==0||c==0);
@@ -165,11 +149,11 @@ maingame(int ht, int sco, int best, int t, int btt){
 						ch[i]="●";		b++;
 					}
 					if(ch[i]==3) {
-						ch[i]="■"; 	c++;}
+						ch[i]="■"; 	c++;
 					}
+				}
 			}while((a*b*c)!=24);
 	
-	 
 			do{ 
 				a=b=c=0;
 				for(i=1; i<10; i++){
@@ -186,60 +170,40 @@ maingame(int ht, int sco, int best, int t, int btt){
 				}
 			}while(a==0||b==0||c==0);
 	
-			for(i=1; i<10; i++){
-				totclr[i]=pntclr[i]+backclr[i];
-			}
-		
+			for(i=1; i<10; i++) totclr[i]=pntclr[i]+backclr[i];
 			tt=0;
 			for(i=1; i<9; i++){
 				for(j=i+1; j<10; j++){			
-					if(totclr[i]==totclr[j]){
-						if(ch[i]==ch[j]) tt=1;
-					}
+					if((totclr[i]==totclr[j])&&(ch[i]==ch[j])) tt=1;
 				}
 			}
-	
 		}while(tt==1);
 	
-		
 		aa=0;
-	///////////정답 수 구하기 
+	//정답 수 구하기 
 		for(i=1; i<8; i++){
 			for(j=i+1; j<9; j++){
 				for(z=j+1; z<10; z++){
 					if(ch[i]==ch[j]&&ch[i]==ch[z]){
 						if(backclr[i]==backclr[j]&&backclr[i]==backclr[z]){
-							if(pntclr[i]==pntclr[j]&&pntclr[i]==pntclr[z]){
-								aa++;
-								aa=ab(i,j,z,aa); }
-							if(pntclr[i]!=pntclr[j]&&pntclr[j]!=pntclr[z]&&pntclr[z]!=pntclr[i]) {
+							if((pntclr[i]==pntclr[j]&&pntclr[i]==pntclr[z])||(pntclr[i]!=pntclr[j]&&pntclr[j]!=pntclr[z]&&pntclr[z]!=pntclr[i])){
 								aa++;
 								aa=ab(i,j,z,aa); }
 						}		
 						if(backclr[i]!=backclr[j]&&backclr[j]!=backclr[z]&&backclr[z]!=backclr[i]){
-							if(pntclr[i]==pntclr[j]&&pntclr[i]==pntclr[z]){
-								aa++;
-								aa=ab(i,j,z,aa); }
-							if(pntclr[i]!=pntclr[j]&&pntclr[j]!=pntclr[z]&&pntclr[z]!=pntclr[i]) {
+							if((pntclr[i]==pntclr[j]&&pntclr[i]==pntclr[z])||(pntclr[i]!=pntclr[j]&&pntclr[j]!=pntclr[z]&&pntclr[z]!=pntclr[i])){
 								aa++;
 								aa=ab(i,j,z,aa); }
 						}
 					}
-					
 					if(ch[i]!=ch[j]&&ch[j]!=ch[z]&&ch[z]!=ch[i]){
 						if(backclr[i]==backclr[j]&&backclr[i]==backclr[z]){
-							if(pntclr[i]==pntclr[j]&&pntclr[i]==pntclr[z]){
-								aa++;
-								aa=ab(i,j,z,aa); }
-							if(pntclr[i]!=pntclr[j]&&pntclr[j]!=pntclr[z]&&pntclr[z]!=pntclr[i]) {
+							if((pntclr[i]==pntclr[j]&&pntclr[i]==pntclr[z])||(pntclr[i]!=pntclr[j]&&pntclr[j]!=pntclr[z]&&pntclr[z]!=pntclr[i])){
 								aa++;
 								aa=ab(i,j,z,aa); }
 						}		
 						if(backclr[i]!=backclr[j]&&backclr[j]!=backclr[z]&&backclr[z]!=backclr[i]){
-							if(pntclr[i]==pntclr[j]&&pntclr[i]==pntclr[z]){
-								aa++;
-								aa=ab(i,j,z,aa); }
-							if(pntclr[i]!=pntclr[j]&&pntclr[j]!=pntclr[z]&&pntclr[z]!=pntclr[i]) {
+							if((pntclr[i]==pntclr[j]&&pntclr[i]==pntclr[z])||(pntclr[i]!=pntclr[j]&&pntclr[j]!=pntclr[z]&&pntclr[z]!=pntclr[i])){
 								aa++;
 								aa=ab(i,j,z,aa); }
 						}
@@ -247,56 +211,38 @@ maingame(int ht, int sco, int best, int t, int btt){
 				}
 			}
 		}
-	}while(aa<-1);	
-
+	}while(aa < -1);	
+	//정답 개수 보기 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 	gotoxy(22,30);
-	printf("개수 : %d\n\n",aa);
+	printf("개수 : %d\n\n", aa);
 	
-	//////////////그림 프린트 
+	//타일 출력 
 		gotoxy(7,10);
-		tile(totclr,f);
-		spch(totclr, ch,f);
-		f=tile2(totclr,f);
+		tile(totclr, f);
+		spch(totclr, ch, f);
+		f=tile2(totclr, f);
 		printf("\n");
-		tile(totclr,f);
-		spch(totclr, ch,f);
-		f=tile2(totclr,f);
+		tile(totclr, f);
+		spch(totclr, ch, f);
+		f=tile2(totclr, f);
 		printf("\n");
-		tile(totclr,f);
-		spch(totclr, ch,f);
-		f=tile2(totclr,f);
+		tile(totclr, f);
+		spch(totclr, ch, f);
+		f=tile2(totclr, f);
 		
-	///////////그림 위치 번호 	
-	gotoxy(10,10);
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[1]+7);
-	printf("１");
-	gotoxy(21,10);
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[2]+7);
-	printf("２");
-	gotoxy(32,10);
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[3]+7);
-	printf("３");
-	gotoxy(10,16);
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[4]+7);
-	printf("４");
-	gotoxy(21,16);
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[5]+7);
-	printf("５");
-	gotoxy(32,16);
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[6]+7);
-	printf("６");
-	gotoxy(10,22);
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[7]+7);
-	printf("７");
-	gotoxy(21,22);
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[8]+7);
-	printf("８");
-	gotoxy(32,22);
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[9]+7);
-	printf("９");
+	//타일 위치 번호 	
+	gotoxy(10,10); SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[1]+7); printf("１");
+	gotoxy(21,10); SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[2]+7); printf("２");
+	gotoxy(32,10); SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[3]+7); printf("３");
+	gotoxy(10,16); SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[4]+7); printf("４");
+	gotoxy(21,16); SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[5]+7); printf("５");
+	gotoxy(32,16); SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[6]+7); printf("６");
+	gotoxy(10,22); SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[7]+7); printf("７");
+	gotoxy(21,22); SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[8]+7); printf("８");
+	gotoxy(32,22); SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), backclr[9]+7); printf("９");
 
-	//////////////////////////////////////////// 중복 정답 
+	// 중복 정답 
 	int over, ov, ove;
 	int	qq[15], ww[15], ee[15];
 	
@@ -305,11 +251,10 @@ maingame(int ht, int sco, int best, int t, int btt){
 		ww[over]=0;
 		ee[over]=0;	
 	}
-	
 	over=1;
 	
 	int x, y;
-   /////////////////////////////////////////입력란 
+   //입력란 
 	for(i=0; i<10000000000; i++){
 			x=50;
 			y=12;
@@ -324,14 +269,12 @@ maingame(int ht, int sco, int best, int t, int btt){
 			x=55;
 			y--;
 			gotoxy(x,y);
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
-			
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);	
 			
 			do{			
 				q=getch()-'0';
-				if(q==72) {
-					printf("   x   "); break;
-				}
+				if(q==72) printf("   x   "); break;
+				
 			}while(9<q||q<1);
 				if(q!=72) {
 					qq[over]=q;
@@ -345,7 +288,6 @@ maingame(int ht, int sco, int best, int t, int btt){
 				ww[over]=w;
 				printf("%d  ",w);
 			}
-	
 			do{
 				if(q==72) break;
 				e=getch()-'0';
@@ -363,21 +305,13 @@ maingame(int ht, int sco, int best, int t, int btt){
 			/////정답 판별 
 			if(ove!=1&&ch[q]==ch[w]&&ch[w]==ch[e]){
 				if(backclr[q]==backclr[w]&&backclr[w]==backclr[e]){
-					if(pntclr[q]==pntclr[w]&&pntclr[w]==pntclr[e]){
-						clr++;
-						sco++;
-					}
-					if(pntclr[q]!=pntclr[w]&&pntclr[w]!=pntclr[e]&&pntclr[q]!=pntclr[e]){
+					if((pntclr[q]==pntclr[w]&&pntclr[w]==pntclr[e])||(pntclr[q]!=pntclr[w]&&pntclr[w]!=pntclr[e]&&pntclr[q]!=pntclr[e])){
 						clr++;
 						sco++;
 					}
 				}
 				if(backclr[q]!=backclr[w]&&backclr[w]!=backclr[e]&&backclr[q]!=backclr[e]){
-					if(pntclr[q]==pntclr[w]&&pntclr[w]==pntclr[e]){
-						clr++;
-						sco++;
-					}
-					if(pntclr[q]!=pntclr[w]&&pntclr[w]!=pntclr[e]&&pntclr[q]!=pntclr[e]){
+					if((pntclr[q]==pntclr[w]&&pntclr[w]==pntclr[e])||(pntclr[q]!=pntclr[w]&&pntclr[w]!=pntclr[e]&&pntclr[q]!=pntclr[e])){
 						clr++;
 						sco++;
 					}
@@ -385,27 +319,18 @@ maingame(int ht, int sco, int best, int t, int btt){
 			}
 			if(ove!=1&&ch[q]!=ch[w]&&ch[w]!=ch[e]&&ch[q]!=ch[e]){
 				if(backclr[q]==backclr[w]&&backclr[w]==backclr[e]){
-					if(pntclr[q]==pntclr[w]&&pntclr[w]==pntclr[e]){
-						clr++;
-						sco++;
-					}
-					if(pntclr[q]!=pntclr[w]&&pntclr[w]!=pntclr[e]&&pntclr[q]!=pntclr[e]){
+					if((pntclr[q]==pntclr[w]&&pntclr[w]==pntclr[e])||(pntclr[q]!=pntclr[w]&&pntclr[w]!=pntclr[e]&&pntclr[q]!=pntclr[e])){
 						clr++;
 						sco++;
 					}
 				}
 				if(backclr[q]!=backclr[w]&&backclr[w]!=backclr[e]&&backclr[q]!=backclr[e]){
-					if(pntclr[q]==pntclr[w]&&pntclr[w]==pntclr[e]){
-						clr++;
-						sco++;
-					}
-					if(pntclr[q]!=pntclr[w]&&pntclr[w]!=pntclr[e]&&pntclr[q]!=pntclr[e]){
+					if((pntclr[q]==pntclr[w]&&pntclr[w]==pntclr[e])||(pntclr[q]!=pntclr[w]&&pntclr[w]!=pntclr[e]&&pntclr[q]!=pntclr[e])){
 						clr++;
 						sco++;
 					}
 				}
-			}
-			
+			}	
 			over++;
 			if(clr==aa&&q==72) clr++;
 		
@@ -421,30 +346,26 @@ maingame(int ht, int sco, int best, int t, int btt){
 			printf("--------------------");
 			
 		}while(clr!=aa+1);
-			sco=sco+3;
-			system("cls");
-			maingame(ht, sco, best, t, btt);
+		sco=sco+3;
+		system("cls");
+		maingame(ht, sco, best, t, btt);
 	}
-	
 }
-
+//점수 
 score(int score){
-	
 	gotoxy(4,3);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 	printf("    SCORE   : %d", score);
 
 	FILE *fp;
-	
 	fp = fopen("score.dat", "wt");
 	
 	fprintf(fp, "%d", score);
 	fclose(fp);
 }
-
+//최고점수 
 bestscore(int a, int score){
 	int best;
-	
 	FILE *bestscore;
 	
 	if(a==0){
@@ -456,20 +377,31 @@ bestscore(int a, int score){
 		fprintf(bestscore, "%d", score);
 		fclose(bestscore);
 	}
-
 	return best;
 }
-
+//시간 
+ttt(int a, int t, int tt){
+	if(a==1){
+      t = clock();
+      return t;
+    }
+	if(a==0){
+		tt = clock();
+		
+		int duration=0;
+        duration = (tt-t)/CLOCKS_PER_SEC;
+        return duration;
+	}	
+}
+//최고점수 플레이 시간 
 best_t(int a, int time){
 	int best_time;
-	
 	FILE *best_t;
 	
 	if(a==0){
 		best_t = fopen("best_t.dat", "r");
 		fscanf(best_t, "%d" , &best_time);	
-	}
-	
+	}	
 	if(a==1){
 		best_t = fopen("best_t.dat", "wt");
 		fprintf(best_t, "%d", time);
@@ -478,24 +410,7 @@ best_t(int a, int time){
 	return best_time;
 }
 
-
-ttt(int a, int t, int tt){
-	
-	if(a==1){
-      t = clock();
-      return t;
-    }
-    
-	if(a==0){
-		tt = clock();
-		
-		int duration=0;
-        duration = (tt-t)/CLOCKS_PER_SEC;
-        return duration;
-	}
-	
-}
-
+////////////////////////////게임오버 화면//////////////////////////////////
 gameover(int sco, int best, int t, int btt, int time){
 	int  enter;
 	system("cls");
@@ -504,7 +419,6 @@ gameover(int sco, int best, int t, int btt, int time){
 	gotoxy(0,2);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 	printf("                     ");
-	
 	gotoxy(29,12);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 	printf("  SCORE    : %-3d\n", sco);
@@ -512,9 +426,7 @@ gameover(int sco, int best, int t, int btt, int time){
 	gotoxy(29,14);
 	printf("PLAY  TIME :%2d m  %2d s\n", (time/60), (time%60));
 
-
 	if(sco>best){
-		
 		best=sco;
 		btt=time;
 		gotoxy(29,18);
@@ -536,7 +448,6 @@ gameover(int sco, int best, int t, int btt, int time){
 		gotoxy(5,18);
 		printf("  ■■■■■■■■");
 		
-		
 		gotoxy(55,13);
 		printf("   ■    ■    ■");
 		gotoxy(55,15);
@@ -547,7 +458,6 @@ gameover(int sco, int best, int t, int btt, int time){
 		printf("  ■■■■■■■■");
 		gotoxy(55,18);
 		printf("  ■■■■■■■■");
-		
 		
 		bestscore(1, sco);
 		best_t(1, time);
@@ -573,20 +483,18 @@ gameover(int sco, int best, int t, int btt, int time){
 			firstscreen(best, btt, 3, sco, time);	
 		}	
 	}
-	
 }
-
+//하트 개수   
 heart(int a, int b, int c, int t, int btt, int time){
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 	if(a==3)printf("  X\n");	
 	if(a==2)printf("  X\n");
 	if(a==1) gameover(b,c, t, btt, time);
 
 	a--;
-	return a;
- 			
+	return a; 			
 }
-
+//하트 화면 
 heart2(int hh){
 	gotoxy(58,3);
 	if(hh==3){
@@ -610,22 +518,22 @@ heart2(int hh){
 	
 }
 
+////////////////////////////로비 화면////////////////////////////////// 
+//로비 상단 디자인 타일 
 maintile(){
 	int i, y=3;
 	for(i=0; i<2; i++){
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),192);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),192);
 		printf("     ");
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf(" "); 
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 128);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 128);
 		printf("     ");
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf(" ");
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 240);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 240);
 		printf("     ");
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf("\n");
 		gotoxy(31,y);
 	}	
@@ -633,46 +541,42 @@ maintile(){
 	y=5;
 	gotoxy(31,y);
 	for(i=0; i<2; i++){
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),128);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),128);
 		printf("     ");
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf(" "); 
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 240);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 240);
 		printf("     ");
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf(" ");
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 32);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 32);
 		printf("     ");
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf("\n");
 		y++;
 		gotoxy(31,y);
 	}
 	printf("\n");
-		y++;
-		gotoxy(31,y);
+	y++;
+	gotoxy(31,y);
 	for(i=0; i<2; i++){
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),145);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),145);
 		printf("     ");
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf(" "); 
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 224);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 224);
 		printf("     ");
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf(" ");
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),128);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),128);
 		printf("     ");
-
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		printf(" \n");
-			y++;
+		y++;
 		gotoxy(31,y);
 	}
 }
-
+ //로비 화면
 firstscreen(int best, int btt, int ht, int score, int time){
 	int t, tt;
 	ht=3;
@@ -690,12 +594,6 @@ firstscreen(int best, int btt, int ht, int score, int time){
 	gotoxy(55,3);
 	printf("   TIME    :%2d m %2d s", (time/60), (time%60));		
 	
-	//gotoxy(0,5);
-	//printf("●★■●★■●★■●★■●★");
-	//gotoxy(52,5);
-	//printf("■●★■●★■●★■●★●★");
-	//gotoxy(0,30);
-	//printf("●★■●★■●★■●★■●★●★■●★■●★■●★■●★●★■●★■●★■●★■");//
 	gotoxy(37,14);
 	printf("START");
 	gotoxy(37,19);
@@ -706,71 +604,90 @@ firstscreen(int best, int btt, int ht, int score, int time){
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),8);
 	printf("이동 : ↑ ↓   선택 : ENTER");
 	
-	
-	keypoint(kk); 
-		
+	//하단 화면// 화살표 이동 
+	keypoint(kk); 	
 	while(1){
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
 		key=getch(); 
 		if(key==224||key==0){
 			key = getch();
-			if(kk!=2){
-				if(key==80) {
-					kk++;
-					keypoint(kk);
-				}
+			if(kk!=2 && key==80){
+				kk++;
+				keypoint(kk);
 			}
-			if(kk!=0){
-				if(key==72) { 
-					kk--;
-					keypoint(kk);
-				}
+			if(kk!=0 && key==72){
+				kk--;
+				keypoint(kk);
 			}
 		}
-		if(kk==0){
-			if(key==13){
-				score=0;
-				t=ttt(1, NULL, NULL);
-				maingame(ht, score, best, t, btt);
-			}
+		if(kk==0 && key==13){
+			score=0;
+			t=ttt(1, NULL, NULL);
+			maingame(ht, score, best, t, btt);
 		}
-		if(kk==1){
-			if(key==13){
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
-				system("cls"); 
-				rule1(best, btt, ht, score, time);
-				
-			}
+		if(kk==1 && key==13){
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
+			system("cls"); 
+			rule1(best, btt, ht, score, time);	
 		}
-		if(kk==2){
-			if(key==13){
-				system("cls"); 
-				gotoxy(33,15);
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
-				printf("감사합니다 :)");
-				gotoxy(28,31);
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),8);
-				printf("ㅡ아무키나 눌러주세요ㅡ");
-				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),0);
-				exit(0);
-			}
+		if(kk==2 && key==13){
+			system("cls"); 
+			gotoxy(33,15);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
+			printf("감사합니다 :)");
+			gotoxy(28,31);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),8);
+			printf("ㅡ아무키나 눌러주세요ㅡ");
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),0);
+			exit(0);
 		}
 	}
 }
+//로비 화면// 커서 이동 
+keypoint(int key){
+	if(key==0){
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
+		gotoxy(48,14);
+		printf("←  ");
+		gotoxy(48,19);
+		printf("    ");
+		gotoxy(48,24);
+		printf("    ");
+	}
+	if(key==1){
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
+		gotoxy(48,14);
+		printf("    ");
+		gotoxy(48,19);
+		printf("←  ");
+		gotoxy(48,24);
+		printf("    ");
+	}
+	if(key==2){
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
+		gotoxy(48,14);
+		printf("    ");
+		gotoxy(48,19);
+		printf("    ");
+		gotoxy(48,24);
+		printf("←  ");
+	}
+}
 
+////////////////////////////게임 설명 화면//////////////////////////////////
+// 1페이지
 rule1(int best, int btt, int ht, int score, int time){
 	system("cls"); 
 	int i, tt, key;
-		
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
 		gotoxy(3,4);
 		printf("1. 바탕색, 도형, 도형의 색이 각각 모두 다르거나 모두 같은");
 		gotoxy(3,5);
-		printf("   3개의 그림을 조합 해야 한다.");
+		printf("   3개의 타일을 조합 해야 한다. (다음 장 예시 참조)");
 		gotoxy(3,7);
 		printf("2. 조합이 더 이상 없다면 'X' 키를 눌러 다음 라운드로 넘어간다. ");
 		gotoxy(3,9);
-		printf("3. 이미 입력 된 그림도 다음 조합에 다시 입력이 가능하다.(=중복 선택 가능)");
+		printf("3. 이미 입력 된 타일도 다음 조합에 다시 입력이 가능하다.(=중복 선택 가능)");
 		gotoxy(3,11);
 		printf("4. 총 3번 오답 시 게임이 종료된다.");
 		gotoxy(3,13);
@@ -814,13 +731,11 @@ rule1(int best, int btt, int ht, int score, int time){
 			}
 			if(key==224||key==0){
 				key = getch();
-				if(key==77) {
-					rule2( best, btt, ht, score, time);
-				}		
+				if(key==77) rule2( best, btt, ht, score, time);
 			}
 		}	
 }
-
+// 2페이지
 rule2(int best, int btt, int ht, int score, int time){
 	int key, i;
 	system("cls");
@@ -856,7 +771,6 @@ rule2(int best, int btt, int ht, int score, int time){
 	printf("> 같은 도형");
 	gotoxy(47,27);
 	printf("> 다른 도형의 색");		
-	
 	
 	gotoxy(13,8);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),233);
@@ -918,23 +832,34 @@ rule2(int best, int btt, int ht, int score, int time){
 		}
 		if(key==224||key==0){
 			key = getch();
-			if(key==77) {
-				rule3(best, btt, ht, score, time);
-			}
-			if(key==75) {
-				rule1(best, btt, ht, score, time);
-			}
+			if(key==77) rule3(best, btt, ht, score, time);
+			if(key==75) rule1(best, btt, ht, score, time);
 		}
 	}
 }
-
+// 2페이지// 예시 타일 출력코드 
+tuto(int a, int b, int c){
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),a);
+		printf("      ");
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		printf(" "); 
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), b);
+		printf("      ");
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		printf(" ");
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);
+		printf("      ");
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
+		printf("\n");
+}
+// 3페이지
 rule3(int best, int btt, int ht, int score, int time){
 	int key, i;
 	system("cls");
 	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
 	gotoxy(21,3);
-	printf("──────────  그림 입력 번호 ──────────");
+	printf("──────────  타일 입력 번호 ──────────");
 	for(i=0; i<3; i++){gotoxy(30,8+i); tuto(112,112,112);}
 	for(i=0; i<3; i++){gotoxy(30,12+i); tuto(112,112,112);}
 	for(i=0; i<3; i++){gotoxy(30,16+i); tuto(112,112,112);}	
@@ -955,7 +880,7 @@ rule3(int best, int btt, int ht, int score, int time){
 	gotoxy(24,25);
 	printf("━  입력 취소 불가능.");
 	gotoxy(24,27);
-	printf("━  그림의 왼쪽 위에 표시되어 있음.");
+	printf("━  타일의 왼쪽 위에 표시되어 있음.");
 	
 	gotoxy(39,32);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
@@ -977,63 +902,12 @@ rule3(int best, int btt, int ht, int score, int time){
 		}
 		if(key==224||key==0){
 			key = getch();
-			if(key==75){
-				rule2(best, btt, ht, score, time);
-			}
+			if(key==75)	rule2(best, btt, ht, score, time);
 		}
 	}
 }
 
-tuto(int a, int b, int c){
-
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),a);
-		printf("      ");
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
-		printf(" "); 
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), b);
-		printf("      ");
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
-		printf(" ");
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);
-		printf("      ");
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0);
-		printf("\n");
-}
-
-keypoint(int key){
-	if(key==0){
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
-		gotoxy(48,14);
-		printf("←  ");
-		gotoxy(48,19);
-		printf("    ");
-		gotoxy(48,24);
-		printf("    ");
-	}
-	
-	if(key==1){
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
-		gotoxy(48,14);
-		printf("    ");
-		gotoxy(48,19);
-		printf("←  ");
-		gotoxy(48,24);
-		printf("    ");
-	}
-	
-	if(key==2){
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),15);
-		gotoxy(48,14);
-		printf("    ");
-		gotoxy(48,19);
-		printf("    ");
-		gotoxy(48,24);
-		printf("←  ");
-	}
-}
-
 int main() {
-	
 	system("mode con:cols=80 lines=34");
 	cursor(0);
 	int bestsco, ht=3, btt, score=0, time=0;
